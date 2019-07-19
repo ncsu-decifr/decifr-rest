@@ -12,4 +12,6 @@ def hello():
 
 
 if __name__ == '__main__':
-    export FLASK_APP=hello
+     pass
+
+
