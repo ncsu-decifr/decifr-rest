@@ -1,6 +1,7 @@
 #!/usr/local/pythonenvs/decifr-rest/bin/python
 
 from flask import Flask, escape, request
+from werkzeug.serving import run_simple
 
 app = Flask(__name__)
 
@@ -12,6 +13,7 @@ def hello():
 
 
 if __name__ == '__main__':
-     pass
+    run_simple('localhost', 8080, app, use_reloader=True)
+
 
 
