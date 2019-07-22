@@ -5,137 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- <link rel="icon" href="../../favicon.ico"> -->
+    <link rel="icon" href="">
 
-    <title>DeCIFR Microbes</title>
+    <title>T-BAS</title>
+ <link rel="stylesheet" href="/static/bootstrap-4.3.1/css/bootstrap.css">
 
-    <!-- Bootstrap core CSS -->
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <style>
 
-    <!-- Custom styles for this template -->
-    <link href="/static/css/rest.css" rel="stylesheet">
-    <link href="/static/css/main.css" rel="stylesheet">
+
+    </style>
+
 
   </head>
 
   <body>
-  <input type="hidden" id="email" value="{{email}}" />
+ <?php
+// include_once "menu2.php";
+?>
 
-   <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
-      <a class="tbas" href="http://decifr.hpc.ncsu.edu/">Home</a>
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        {% include 'menu.html' %}
-      </div>
-    </nav>
 
 
     <section class="jumbotron text-center">
-      <div class="container">
-        <h1 class="jumbotron-heading">DeCIFR REST API to TBAS V2</h1>
-         <p>
-          <!-- <a href="https://decifr.hpc.ncsu.edu/" class="btn btn-primary">Home</a> -->
-          <!-- <a href="#" class="btn btn-secondary">Secondary action</a> -->
-        </p>
-        <!-- <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p> -->
-
+    <div style="margin: 0px 150px 0px;">
+      <!-- <div class="container"> -->
+        <h2 style="font-weight: 300;"  class="jumbotron-heading">Welcome to T-BAS&nbsp;v.&nbsp;2.1</h2>
+        <p class="lead text-muted">REST API to T-BAS</p>
       </div>
     </section>
 
-      <div class="container">
 
-        <div class="row">
-          <div class="col-md-1"></div>
-          <div class="col-md-10">
-            <h2>About</h2>
-          <p>The DeCIFR REST API service allows access to results of a previous run of T-BAS v2 via HTTP with a browser request, programmatically, or using a command line tool such as CURL. </p>
-
-          <p>REST allows the user to submit a query to retrieve specific metadata associated with a leaf on T-BAS reference tree or to
-retrieve the taxonomic assignment and metadata of an unknown placement on the tree.</p>
-
-          <p>For retrieving data using HTML requests the query of a resource starts with https://tools.decifr.hpc.ncsu.edu/rest/html/ in
-the URL name, followed by the T-BAS run number (e.g. YJCK3WI4) and a keyword of the type of data retrieved (e.g.
-placements). The full HTML request to retrieve the placement results in this example would look like this:</p>
-
-  <p><a href="https://tools.decifr.hpc.ncsu.edu/rest/html/YJCK3WI4/placements">https://tools.decifr.hpc.ncsu.edu/rest/html/YJCK3WI4/placements</a> </p>
-
-          <p>This will return the taxonomic assignments of all unknowns that were placed using the Pezizomycotina reference tree in
-run YJCK3WI4. The placements are shown in a web page as formatted JSON output files embedded in HTML. Other
-examples of information that can be retrieved are shown below.</p>
-          <div class="border">
-            <h2>Examples using HTML</h2>
-            <h5>Pages require login with T-BAS PIN.</h5>
-          </div>
-          <table>
-            <tr><td class="col1">List of placements on a tree</td><td>https://tools.decifr.hpc.ncsu.edu/rest/html/YJCK3WI4/placements</td></tr>
-
-            <tr><td class="col1">List of leaves (terminals) on a tree</td><td>https://tools.decifr.hpc.ncsu.edu/rest/html/YJCK3WI4/leaves</td></tr>
-
-            <tr><td class="col1">Metadata of a leaf</td><td>https://tools.decifr.hpc.ncsu.edu/rest/html/YJCK3WI4?query=Schizosaccharomyces_pombe</td></tr>
-
-            <tr><td class="col1">Metadata and taxonomy of a specific placement</td><td>https://tools.decifr.hpc.ncsu.edu/rest/html/YJCK3WI4?placement=6407_endo</td></tr>
-
-          </table>
-
-          <p>A query of a resource starting with https://tools.decifr.hpc.ncsu.edu/rest/json/ will return the requested data in JSON format. Authorization is by authentication header credentials submitted in the request.</p>
-          <div class="border">
-            <h2>Examples using JSON</h2>
-            <h5>Request requires username and password  (Note this is not the same as T-BAS PIN).</h5>
-          </div>
-            <table>
-              <tr><td class="col1">List of placements on a tree as JSON</td><td>https://tools.decifr.hpc.ncsu.edu/rest/json/YJCK3WI4/placements</td></tr>
-              <tr><td class="col1">List of leaves (terminals) on a tree as JSON</td><td>https://tools.decifr.hpc.ncsu.edu/rest/json/YJCK3WI4/leaves</td></tr>
-          </table>
-          <p>CURL is a command line tool that can be used to transfer data with URLs. CURL makes it easy to retrieve taxonomic
-assignment results from T-BAS into other tools and pipelines.</p>
-          <div class="border">
-          <h2>Examples using command line</h2>
-          <h5>Request requires username  and password  (Note this is not the same as T-BAS PIN).</h5>
-          </div>
-          <table>
-              <tr><td class="col1">List of placements on a tree as JSON</td><td>curl&nbsp;https://user:pass@tools.decifr.hpc.ncsu.edu/rest/json/YJCK3WI4/placements</td></tr>
-              <tr><td class="col1">List of leaves (terminals) on a tree as JSON</td><td>curl&nbsp;https://user:pass@tools.decifr.hpc.ncsu.edu/rest/json/YJCK3WI4/leaves</td></tr>
-          </table>
-          <h2>Links for example data</h2>
-          <table>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="/static/bootstrap-4.3.1/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.js"></script>
 
 
-
-            <tr>
-              <td>{{ runid }}</td>
-              <td><a href='{{ base_url }}/rest/html/YJCK3WI4/leaves'>list of leaves or terminals</a></td>
-              <td><a href='{{ base_url }}/rest/html/YJCK3WI4/placements'>list of placements</a></td>
-            </tr>
-
-
-          </table>
-
-
-
-
-          </div>
-        </div>
-
-      </div>
- <!-- include 'footer.html' -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-
-    <script src="/static/js/vendor/jquery-3.2.1.min.js"></script>
-    <script src="/static/js/vendor/holder.min.js"></script>
-    <script src="/static/js/vendor/popper.js"></script>
-    <script>
-      $(function () {
-        Holder.addTheme("thumb", { background: "#55595c", foreground: "#eceeef", text: "Thumbnail" });
-      });
-    </script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/listing.js?_={{cache_ctl}}"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
   </body>
 </html>
