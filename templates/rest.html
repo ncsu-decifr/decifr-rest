@@ -25,18 +25,31 @@
 
 
 
-    <section class="jumbotron text-center">
-    <div style="margin: 0px 150px 0px;">
-      <!-- <div class="container"> -->
-        <h2 style="font-weight: 300;"  class="jumbotron-heading">Welcome to T-BAS&nbsp;v.&nbsp;2.1</h2>
-        <p class="lead text-muted">REST API to T-BAS</p>
-      </div>
-    </section>
+<section class="jumbotron text-center">
+<div style="margin: 0px 150px 0px;">
+  <!-- <div class="container"> -->
+    <h2 style="font-weight: 300;"  class="jumbotron-heading">Welcome to T-BAS&nbsp;v.&nbsp;2.1</h2>
+    <p class="lead text-muted">REST API to T-BAS</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+      {% for runid in runids %}
+      <p>{{ runid }}</p>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</div>
 
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="/static/bootstrap-4.3.1/js/bootstrap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/static/bootstrap-4.3.1/js/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.js"></script>
 
 
   </body>

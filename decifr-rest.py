@@ -7,7 +7,6 @@ import glob
 
 app = Flask(__name__)
 app.config['TMP_FOLDER'] = "/var/www/html/tbas2_1/tmp"
-app.config['version'] = 'development'
 
 
 @app.route('/')
@@ -25,15 +24,9 @@ def rest():
         runid = file[-12:-4]
         runids.append(runid)
 
-    if app.config['version'] == 'development':
-        base_url = "http://localhost:8080"
-    else:
-        base_url = "https://tools.decifr.hpc.ncsu.edu"
     return render_template(
         'rest.html',
-        runids=runids,
-        base_url=base_url
-
+        runids=runids
     )
 
 
