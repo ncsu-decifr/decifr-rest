@@ -25,7 +25,7 @@ def rest():
         runids.append(runid)
 
     return render_template(
-        'rest.html',
+        'test.xml',
         runids=runids
     )
 
