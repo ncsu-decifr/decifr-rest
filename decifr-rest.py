@@ -67,13 +67,19 @@ def list():
     )
     files = set(files) - set(files_updated)
     runids = []
+    runids_updated = []
     for file in files:
         runid = file[-12:-4]
         runids.append(runid)
 
+    for file in files_updated:
+        runid = file[-12:-4]
+        runids_updated.append(runid)
+
     return render_template(
         'list.xml',
-        runids=runids
+        runids=runids,
+        runids_updated=runids_updated
     )
 
 

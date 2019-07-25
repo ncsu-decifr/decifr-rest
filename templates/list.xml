@@ -15,5 +15,10 @@
     {% for runid in runids %}
     <p><a href="/run/{{ runid }}">{{ runid }}</a></p>
     {% endfor %}
+
+     <h2>Run ids with updated voucher</h2>
+    {% for runid in runids_updated %}
+    <p><a href="/run/{{ runid }}">{{ runid }}</a></p>
+    {% endfor %}
 </body>
 </html>
