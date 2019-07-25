@@ -56,10 +56,16 @@ def hello():
 
 
 @app.route("/list")
-def rest():
+def list():
     logger.debug("/list")
 
-    files = glob.glob("%s/phyloxml_cifr*.xml" % app.config['TMP_FOLDER'])
+    files = glob.glob(
+        "%s/phyloxml_cifr*.xml" % app.config['TMP_FOLDER']
+    )
+    files_updated = glob.glob(
+        "%s/phyloxml_cifr_edit_metadata*.xml" % app.config['TMP_FOLDER']
+    )
+    files = set(files) - set(files_updated)
     runids = []
     for file in files:
         runid = file[-12:-4]
