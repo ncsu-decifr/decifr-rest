@@ -72,7 +72,7 @@ def rest():
 
 
 @app.route("/run/<runid>")
-@requires_auth
+# @requires_auth
 def run(runid):
     return render_template(
         'run.xml',
@@ -81,7 +81,7 @@ def run(runid):
 
 
 @app.route("/leaves/<runid>")
-@requires_auth
+# @requires_auth
 def leaves(runid):
     return render_template(
         'run.xml',
