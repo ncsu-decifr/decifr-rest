@@ -7,6 +7,7 @@ import glob
 
 app = Flask(__name__)
 app.config['TMP_FOLDER'] = "/var/www/html/tbas2_1/tmp"
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 @app.route('/')
@@ -15,7 +16,7 @@ def hello():
     return 'Hello, %s!' % escape(name)
 
 
-@app.route("/rest")
+@app.route("/list")
 def rest():
 
     files = glob.glob("%s/phyloxml_cifr*.xml" % app.config['TMP_FOLDER'])
@@ -25,13 +26,21 @@ def rest():
         runids.append(runid)
 
     return render_template(
-        'test.xml',
+        'list.xml',
         runids=runids
     )
 
 
+@app.route("/runs/<runid>")
+def runs(runid):
+    return render_template(
+        'run.xml',
+        runid=runid
+    )
+
+
 if __name__ == '__main__':
-    run_simple('localhost', 8080, app, use_reloader=True)
+    run_simple('localhost', 8090, app, use_reloader=True, )
 
 
 

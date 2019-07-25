@@ -4,10 +4,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Decifr REST</title>
+    <style>
+        p, h2 {
+            margin-left: 50px;
+        }
+    </style>
   </head>
   <body>
-    {% for runid in runids %}
-      <p>{{ runid }}</p>
-    {% endfor %}
+    <h2>dev</h2>
+
 </body>
 </html>
