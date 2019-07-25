@@ -96,7 +96,7 @@ def run(runid):
 # @requires_auth
 def leaves(runid):
     return render_template(
-        'run.xml',
+        'leaves.xml',
         runid=runid
     )
 
