@@ -5,6 +5,18 @@ from flask import render_template
 from werkzeug.serving import run_simple
 import glob
 from functools import wraps
+import logging
+
+logger = logging.getLogger("decifr-rest")
+logger.setLevel(logging.DEBUG)
+fh = logging.FileHandler('/var/www/wsgi/decifr-rest/logs/logs.log')
+formatter = logging.Formatter(
+    '%(asctime)s - %(name)s, %(lineno)s - %(levelname)s - %(message)s',
+    datefmt='%m/%d %H:%M:%S'
+)
+fh.setFormatter(formatter)
+logger.addHandler(fh)
+logger.debug("start app")
 
 app = Flask(__name__)
 app.config['TMP_FOLDER'] = "/var/www/html/tbas2_1/tmp"
@@ -45,6 +57,7 @@ def hello():
 
 @app.route("/list")
 def rest():
+    logger.debug("/list")
 
     files = glob.glob("%s/phyloxml_cifr*.xml" % app.config['TMP_FOLDER'])
     runids = []
@@ -58,14 +71,22 @@ def rest():
     )
 
 
-@app.route("/runs/<runid>")
+@app.route("/run/<runid>")
 @requires_auth
-def runs(runid):
+def run(runid):
     return render_template(
         'run.xml',
         runid=runid
     )
 
+
+@app.route("/leaves/<runid>")
+@requires_auth
+def leaves(runid):
+    return render_template(
+        'run.xml',
+        runid=runid
+    )
 
 if __name__ == '__main__':
     run_simple('localhost', 8090, app, use_reloader=True, )

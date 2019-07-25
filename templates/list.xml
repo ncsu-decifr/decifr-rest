@@ -13,7 +13,7 @@
   <body>
     <h2>Run ids</h2>
     {% for runid in runids %}
-    <p><a href="/runs/{{ runid }}">{{ runid }}</a></p>
+    <p><a href="/run/{{ runid }}">{{ runid }}</a></p>
     {% endfor %}
 </body>
 </html>
