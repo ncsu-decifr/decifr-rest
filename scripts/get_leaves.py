@@ -12,4 +12,4 @@ if __name__ == '__main__':
         main()
     except Exception:
         error = traceback.format_exc()
-        print error
+        print(error)
