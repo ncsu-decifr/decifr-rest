@@ -6,6 +6,7 @@ from werkzeug.serving import run_simple
 import glob
 from functools import wraps
 import logging
+import subprocess
 
 logger = logging.getLogger("decifr-rest")
 logger.setLevel(logging.DEBUG)
@@ -95,6 +96,9 @@ def run(runid):
 @app.route("/leaves/<runid>")
 # @requires_auth
 def leaves(runid):
+    import scripts.get_leaves
+
+    return scripts.get_leaves.main(runid)
     return render_template(
         'leaves.xml',
         runid=runid

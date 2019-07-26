@@ -2,7 +2,7 @@
 
 import traceback
 import sys
-from lxml import etree
+# from lxml import etree
 from lxml.etree import XMLParser
 from lxml.etree import parse
 import json
@@ -33,7 +33,6 @@ def main(run_id):
             # break
             pass
     return json.dumps(name_list, indent=4)
-
 
 
 if __name__ == '__main__':
