@@ -6,7 +6,8 @@ from werkzeug.serving import run_simple
 import glob
 from functools import wraps
 import logging
-import subprocess
+import json
+import traceback
 
 logger = logging.getLogger("decifr-rest")
 logger.setLevel(logging.DEBUG)
@@ -98,10 +99,17 @@ def run(runid):
 def leaves(runid):
     import scripts.get_leaves
 
-    return scripts.get_leaves.main(runid)
+    try:
+        leaves_json = scripts.get_leaves.main(runid)
+        leaves = json.loads(leaves_json)
+    except Exception:
+        error = traceback.format_exc()
+        return "<pre>%s</pre>" % error
+
     return render_template(
         'leaves.xml',
-        runid=runid
+        runid=runid,
+        leaves=leaves
     )
 
 if __name__ == '__main__':
