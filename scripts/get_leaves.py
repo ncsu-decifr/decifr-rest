@@ -30,7 +30,8 @@ def main(run_id):
     ):
         name_list.append(element.text)
         if cnt > 5000:
-            break
+            # break
+            pass
     return json.dumps(name_list, indent=4)
 
 
