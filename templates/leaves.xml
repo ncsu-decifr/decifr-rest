@@ -12,6 +12,11 @@
   </head>
   <body>
     <h2>{{ runid }}</h2>
+    <ol>
 
+  {% for leaf in leaves %}
+    <li>{{ leaf }}</li>
+    {% endfor %}
+  </ol>
 </body>
 </html>
