@@ -119,10 +119,13 @@ def leaves(runid):
 def leaf(runid):
     import scripts.get_metadata
     query = request.args.get("query")
-
-    retval = scripts.get_metadata.main(
-        runid, query, app.config['TMP_FOLDER']
-    )
+    try:
+        retval = scripts.get_metadata.main(
+            runid, query, app.config['TMP_FOLDER']
+        )
+    except Exception:
+        error = traceback.format_exc()
+        return "<pre>%s</pre>" % error
 
     return "<pre>%s</pre>" % retval
 
