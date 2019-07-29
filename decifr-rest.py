@@ -130,6 +130,13 @@ def leaf(runid):
     return "<pre>%s</pre>" % retval
 
 
+@app.route("/queries/<runid>")
+# @requires_auth
+def queries(runid):
+    return "dev"
+
+
+
 if __name__ == '__main__':
     run_simple('localhost', 8090, app, use_reloader=True)
 
