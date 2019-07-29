@@ -69,12 +69,10 @@ def placement_fn(runid, query):
         value = element[1].text
         retval['attributes'][name] = value
 
-
-
     return json.dumps(retval, indent=4)
 
 
-def main(runid, query):
+def main(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     # raise Exception("goodby cruel world")
     retval = {}
 
@@ -85,6 +83,7 @@ def main(runid, query):
         logger.debug(x)
         if x.tag == '{http://www.phyloxml.org}phylogeny':
             phylogeny = x
+
     # for element in phylogeny.iter('{http://www.phyloxml.org}name'):
     #     if element.text == query:
     #         retval['name'] = query
@@ -93,6 +92,7 @@ def main(runid, query):
     #         continue
     # e = phylogeny.xpath('.//a[text()="TEXT A"]')
     # expr = "//*[local-name() = $name]"
+
     expr = ".//x:name[text() = $name]"
     test = phylogeny.xpath(
         expr,

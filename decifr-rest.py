@@ -117,21 +117,14 @@ def leaves(runid):
 @app.route("/leaf/<runid>/metadata")
 # @requires_auth
 def leaf(runid):
+    import scripts.get_metadata
     query = request.args.get("query")
-    placement = request.args.get('placement', "na")
-    cmd_args = [
-        app.config['SCRIPTS_DIR'] + "rest_query.py",
-        runid,
-        query,
-        placement
-    ]
 
-    # subprocess.call(cmd_args)
-    logger.debug(" ".join(cmd_args))
-    logger.debug(os.getcwd())
-    retval = subprocess.check_output(cmd_args).strip()
+    retval = scripts.get_metadata.main(
+        runid, query, app.config['TMP_FOLDER']
+    )
+
     return "<pre>%s</pre>" % retval
-
 
 
 if __name__ == '__main__':
