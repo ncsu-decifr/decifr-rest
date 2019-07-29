@@ -8,10 +8,7 @@ from lxml.etree import parse
 import json
 
 
-TMP_FOLDER = "/var/www/html/tbas2_1/tmp"
-
-
-def main(run_id):
+def main(run_id, TMP_FOLDER="/var/www/html/tbas2_1/tmp"):
     # raise Exception("dev")
     print(run_id)
     xmlfile = "%s/phyloxml_cifr_%s.xml" % (TMP_FOLDER, run_id)

@@ -22,6 +22,7 @@ logger.debug("start app")
 
 app = Flask(__name__)
 app.config['TMP_FOLDER'] = "/var/www/html/tbas2_1/tmp"
+app.config['TMP_FOLDER'] = "/home/jim/.local/share/Trash/files"
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
@@ -100,7 +101,7 @@ def leaves(runid):
     import scripts.get_leaves
 
     try:
-        leaves_json = scripts.get_leaves.main(runid)
+        leaves_json = scripts.get_leaves.main(runid, app.config['TMP_FOLDER'])
         leaves = json.loads(leaves_json)
     except Exception:
         error = traceback.format_exc()
@@ -113,7 +114,7 @@ def leaves(runid):
     )
 
 if __name__ == '__main__':
-    run_simple('localhost', 8090, app, use_reloader=True, )
+    run_simple('localhost', 8090, app, use_reloader=True)
 
 
 
