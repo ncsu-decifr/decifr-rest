@@ -118,7 +118,19 @@ def leaves(runid):
 # @requires_auth
 def leaf(runid):
     query = request.args.get("query")
-    return query
+    placement = request.args.get('placement', "na")
+    cmd_args = [
+        app.config['SCRIPTS_DIR'] + "rest_query.py",
+        runid,
+        query,
+        placement
+    ]
+
+    # subprocess.call(cmd_args)
+    logger.debug(" ".join(cmd_args))
+    logger.debug(os.getcwd())
+    retval = subprocess.check_output(cmd_args).strip()
+    return "<pre>%s</pre>" % retval
 
 
 
