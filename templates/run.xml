@@ -13,6 +13,8 @@
   <body>
     <h2>{{ runid }}</h2>
     <p><a href="/leaves/{{ runid }}">leaves</p></p>
+    <p><a href="/queries/{{ runid }}">queries</p></p>
+    <p><a href="/otus/{{ runid }}">otus</p></p>
 
 </body>
 </html>
