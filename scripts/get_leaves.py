@@ -6,6 +6,17 @@ import sys
 from lxml.etree import XMLParser
 from lxml.etree import parse
 import json
+import logging
+
+logger = logging.getLogger(__file__)
+logger.setLevel(logging.DEBUG)
+fh = logging.FileHandler('/var/www/wsgi/decifr-rest/logs/logs.log')
+formatter = logging.Formatter(
+    '%(asctime)s - %(name)s, %(lineno)s - %(levelname)s - %(message)s',
+    datefmt='%m/%d %H:%M:%S'
+)
+fh.setFormatter(formatter)
+logger.addHandler(fh)
 
 
 def get_queries(run_id, TMP_FOLDER="/var/www/html/tbas2_1/tmp"):
@@ -14,10 +25,14 @@ def get_queries(run_id, TMP_FOLDER="/var/www/html/tbas2_1/tmp"):
     tree = parse(xmlfile, parser=p)
     root = tree.getroot()
     name_list = []
-
+    otus = None
     for x in root:
         if x.tag == '{http://www.cifr.ncsu.edu}otus':
             otus = x
+
+    logger.debug(root)
+    if not otus:
+        raise Exception("no queries found")
 
     for cnt, element in enumerate(
         otus.iter('{http://www.cifr.ncsu.edu}placement')
