@@ -113,6 +113,15 @@ def leaves(runid):
         leaves=leaves
     )
 
+
+@app.route("/leaf/<runid>/metadata")
+# @requires_auth
+def leaf(runid):
+    query = request.args.get("query")
+    return query
+
+
+
 if __name__ == '__main__':
     run_simple('localhost', 8090, app, use_reloader=True)
 
