@@ -133,17 +133,23 @@ def leaf(runid):
 @app.route("/queries/<runid>")
 # @requires_auth
 def queries(runid):
-    import scripts.leaves
-    query = request.args.get("query")
+    import scripts.get_leaves
+
     try:
-        retval = scripts.get_leaves.get_queries(
-            runid, query, app.config['TMP_FOLDER']
+        leaves_json = scripts.get_leaves.get_queries(
+            runid, app.config['TMP_FOLDER']
         )
+        leaves = json.loads(leaves_json)
     except Exception:
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
 
-    return "<pre>%s</pre>" % retval
+    return render_template(
+        'leaves.xml',
+        runid=runid,
+        leaves=leaves
+    )
+
 
 
 if __name__ == '__main__':
