@@ -1,5 +1,5 @@
 # decifr-rest
-DeCIFR REST API
+DeCIFR REST server
 
 ## Installation
 
