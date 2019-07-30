@@ -26,7 +26,7 @@ tmp_dir = "/var/www/html/tbas2_1/tmp"
 
 
 def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
-
+    retval = {}
     with open("%s/phyloxml_cifr_%s.xml" % (tmp_dir, runid)) as fp:
         tree = etree.parse(fp)
     root = tree.getroot()
@@ -39,12 +39,32 @@ def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     if not otus:
         raise Exception("no queries found")
 
-    for cnt, element in enumerate(
-        otus.iter('{http://www.cifr.ncsu.edu}placement')
-    ):
-        pass
+    expr = ".//x:name[text() = $name]"
+    test = otus.xpath(
+        expr,
+        name=query,
+        namespaces={
+            'x': 'http://www.phyloxml.org',
+            'b': 'http://www.cifr.ncsu.edu'
+        }
+    )
+    if len(test) == 0:
+        raise Exception("no species matches query")
+    logger.debug(test[0].tag)
+    logger.debug(test[0].text)
+    element = test[0]
 
-    return json.dumps({"hello": "world"})
+    retval['name'] = query
+    clade = element.getparent()
+
+    for element in clade.iter('{http://www.cifr.ncsu.edu}attribute'):
+        name = element[0].text
+        value = element[1].text
+        retval[name] = value
+
+    return json.dumps(retval, indent=4)
+
+    # return json.dumps({"hello": "world"})
 
 
 def main(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
