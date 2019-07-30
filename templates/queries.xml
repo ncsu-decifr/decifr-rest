@@ -14,8 +14,8 @@
     <h2>{{ runid }}</h2>
     <ol>
 
-  {% for leaf in leaves %}
-  <li>{{ leaf }} - <a href="/leaf/{{ runid }}/metadata?query={{ leaf }}">metadata</a></li>
+  {% for query in queries %}
+  <li>{{ query }} - <a href="/query/{{ runid }}/metadata?query={{ query }}">metadata</a></li>
     {% endfor %}
   </ol>
 </body>

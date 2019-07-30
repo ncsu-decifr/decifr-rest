@@ -136,23 +136,19 @@ def queries(runid):
     import scripts.get_leaves
 
     try:
-        leaves_json = scripts.get_leaves.get_queries(
+        queries_json = scripts.get_leaves.get_queries(
             runid, app.config['TMP_FOLDER']
         )
-        leaves = json.loads(leaves_json)
+        queries = json.loads(queries_json)
     except Exception:
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
 
-    # return "<pre>%s</pre>" % leaves_json
-
-
     return render_template(
         'queries.xml',
         runid=runid,
-        leaves=leaves
+        queries=queries
     )
-
 
 
 if __name__ == '__main__':
