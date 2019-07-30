@@ -26,21 +26,25 @@ tmp_dir = "/var/www/html/tbas2_1/tmp"
 
 
 def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
-    # raise Exception("goodby cruel world")
-    retval = {}
 
     with open("%s/phyloxml_cifr_%s.xml" % (tmp_dir, runid)) as fp:
         tree = etree.parse(fp)
     root = tree.getroot()
-    for x in root:
-        logger.debug(x)
-        if x.tag == '{http://www.phyloxml.org}phylogeny':
-            phylogeny = x
 
-    logger.debug(phylogeny)
+    for x in root:
+        if x.tag == '{http://www.cifr.ncsu.edu}otus':
+            otus = x
+
+    logger.debug(root)
+    if not otus:
+        raise Exception("no queries found")
+
+    for cnt, element in enumerate(
+        otus.iter('{http://www.cifr.ncsu.edu}placement')
+    ):
+        pass
 
     return json.dumps({"hello": "world"})
-
 
 
 def main(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
