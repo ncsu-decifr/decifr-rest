@@ -144,14 +144,14 @@ def queries(runid):
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
 
-    return "<pre>%s</pre>" % leaves_json
+    # return "<pre>%s</pre>" % leaves_json
 
 
-    # return render_template(
-    #     'leaves.xml',
-    #     runid=runid,
-    #     leaves=leaves
-    # )
+    return render_template(
+        'queries.xml',
+        runid=runid,
+        leaves=leaves
+    )
 
 
 
