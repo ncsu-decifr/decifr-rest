@@ -11,7 +11,7 @@ import traceback
 
 logger = logging.getLogger("decifr-rest")
 logger.setLevel(logging.DEBUG)
-fh = logging.FileHandler('/var/www/wsgi/decifr-rest/logs/logs.log')
+fh = logging.FileHandler('logs/logs.log')
 formatter = logging.Formatter(
     '%(asctime)s - %(name)s, %(lineno)s - %(levelname)s - %(message)s',
     datefmt='%m/%d %H:%M:%S'
