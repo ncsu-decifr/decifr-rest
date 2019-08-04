@@ -25,6 +25,38 @@ logger.addHandler(fh)
 
 tmp_dir = "/var/www/html/tbas2_1/tmp"
 
+def otu_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
+    retval = {}
+    p = XMLParser(huge_tree=True)
+    with open("%s/phyloxml_cifr_%s.xml" % (tmp_dir, runid)) as fp:
+        tree = etree.parse(fp, parser=p)
+    root = tree.getroot()
+
+    for x in root:
+        if x.tag == '{http://www.cifr.ncsu.edu}otus':
+            otus = x
+
+    logger.debug(root)
+    if not otus:
+        raise Exception("no queries found")
+
+    expr = ".//b:otu[text() = $name]"
+    test = otus.xpath(
+        expr,
+        name=query,
+        namespaces={
+            'x': 'http://www.phyloxml.org',
+            'b': 'http://www.cifr.ncsu.edu'
+        }
+    )
+    if len(test) == 0:
+        raise Exception("no species matches query")
+
+    logger.debug(test[0].tag)
+    logger.debug(test[0].text)
+    element = test[0]
+    return element
+
 
 def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     retval = {}

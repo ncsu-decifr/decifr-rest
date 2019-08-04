@@ -196,7 +196,7 @@ def otu(runid):
     import scripts.get_metadata
     query = request.args.get("query")
     try:
-        retval = scripts.get_metadata.get_query(
+        retval = scripts.get_metadata.otu_query(
             runid, query, app.config['TMP_FOLDER']
         )
     except Exception:
