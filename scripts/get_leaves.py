@@ -32,7 +32,7 @@ def get_otus(run_id, TMP_FOLDER="/var/www/html/tbas2_1/tmp"):
 
     logger.debug(root)
     if not otus:
-        raise Exception("no queries found")
+        raise Exception("no otus found")
 
     for otu in otus:
         otu_list.append(otu[0].text)
