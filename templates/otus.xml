@@ -15,7 +15,7 @@
     <ol>
 
   {% for otu in otus %}
-  <li>{{ otu }} - <a href="/otu/{{ runid }}/metadata?otu={{ otu }}">metadata</a></li>
+  <li>{{ otu }} - <a href="/otu/{{ runid }}/metadata?query={{ otu }}">metadata</a></li>
     {% endfor %}
   </ol>
 </body>
