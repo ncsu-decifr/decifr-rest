@@ -19,6 +19,27 @@ fh.setFormatter(formatter)
 logger.addHandler(fh)
 
 
+def get_otus(run_id, TMP_FOLDER="/var/www/html/tbas2_1/tmp"):
+    xmlfile = "%s/phyloxml_cifr_%s.xml" % (TMP_FOLDER, run_id)
+    p = XMLParser(huge_tree=True)
+    tree = parse(xmlfile, parser=p)
+    root = tree.getroot()
+    otu_list = []
+    otus = None
+    for x in root:
+        if x.tag == '{http://www.cifr.ncsu.edu}otus':
+            otus = x
+
+    logger.debug(root)
+    if not otus:
+        raise Exception("no queries found")
+
+    for otu in otus:
+        otu_list.append(otu[0].text)
+
+    return json.dumps(otu_list, indent=4)
+
+
 def get_queries(run_id, TMP_FOLDER="/var/www/html/tbas2_1/tmp"):
     xmlfile = "%s/phyloxml_cifr_%s.xml" % (TMP_FOLDER, run_id)
     p = XMLParser(huge_tree=True)

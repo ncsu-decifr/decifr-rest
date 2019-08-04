@@ -167,6 +167,29 @@ def query(runid):
     return "<pre>%s</pre>" % retval
 
 
+@app.route("/otus/<runid>")
+# @requires_auth
+def otus(runid):
+    import scripts.get_leaves
+
+    try:
+        otus_json = scripts.get_leaves.get_otus(
+            runid, app.config['TMP_FOLDER']
+        )
+        otus = json.loads(otus_json)
+    except Exception:
+        error = traceback.format_exc()
+        return "<pre>%s</pre>" % error
+
+    # return otus_json
+
+    return render_template(
+        'otus.xml',
+        runid=runid,
+        otus=otus
+    )
+
+
 if __name__ == '__main__':
     run_simple('localhost', 8090, app, use_reloader=True)
 
