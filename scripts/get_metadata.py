@@ -60,11 +60,17 @@ def otu_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
 
     retval['otu'] = query
     retval['leaf_name'] = otu[1].text
+    retval['taxonomy'] = {}
+    retval['otu_strains'] = []
 
-    for element in otu.iter('{http://www.cifr.ncsu.edu}attribute'):
+    for element in otu.iter('{http://www.cifr.ncsu.edu}taxon'):
         name = element[0].text
         value = element[1].text
-        retval[name] = value
+        retval['taxonomy'][name] = value
+
+    for element in otu.iter('{http://www.cifr.ncsu.edu}placement'):
+        name = element[0].text
+        retval['otu_strains'].append(name)
 
     return json.dumps(retval, indent=4)
 
