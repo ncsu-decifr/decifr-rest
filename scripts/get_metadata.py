@@ -56,7 +56,12 @@ def otu_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     logger.debug(test[0].tag)
     logger.debug(test[0].text)
     element = test[0]
-    return element.text
+    otu = element.getparent()
+
+    retval['otu'] = query
+    retval['leaf_name'] = otu[1].text
+
+    return json.dumps(retval, indent=4)
 
 
 def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
