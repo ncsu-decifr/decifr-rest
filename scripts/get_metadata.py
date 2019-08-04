@@ -25,6 +25,7 @@ logger.addHandler(fh)
 
 tmp_dir = "/var/www/html/tbas2_1/tmp"
 
+
 def otu_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     retval = {}
     p = XMLParser(huge_tree=True)
@@ -40,7 +41,7 @@ def otu_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     if not otus:
         raise Exception("no queries found")
 
-    expr = ".//b:otu[text() = $name]"
+    expr = ".//b:name[text() = $name]"
     test = otus.xpath(
         expr,
         name=query,
@@ -55,7 +56,7 @@ def otu_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     logger.debug(test[0].tag)
     logger.debug(test[0].text)
     element = test[0]
-    return element
+    return element.text
 
 
 def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
