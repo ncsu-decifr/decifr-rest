@@ -190,6 +190,22 @@ def otus(runid):
     )
 
 
+@app.route("/otu/<runid>/metadata")
+# @requires_auth
+def otu(runid):
+    import scripts.get_metadata
+    query = request.args.get("query")
+    try:
+        retval = scripts.get_metadata.get_query(
+            runid, query, app.config['TMP_FOLDER']
+        )
+    except Exception:
+        error = traceback.format_exc()
+        return "<pre>%s</pre>" % error
+
+    return "<pre>%s</pre>" % retval
+
+
 if __name__ == '__main__':
     run_simple('localhost', 8090, app, use_reloader=True)
 
