@@ -38,8 +38,8 @@ def otu_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
             otus = x
 
     logger.debug(root)
-    if not otus:
-        raise Exception("no queries found")
+    if otus is None:
+        raise Exception("no otus found")
 
     expr = ".//b:name[text() = $name]"
     test = otus.xpath(
@@ -60,6 +60,11 @@ def otu_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
 
     retval['otu'] = query
     retval['leaf_name'] = otu[1].text
+
+    for element in otu.iter('{http://www.cifr.ncsu.edu}attribute'):
+        name = element[0].text
+        value = element[1].text
+        retval[name] = value
 
     return json.dumps(retval, indent=4)
 
