@@ -86,8 +86,7 @@ def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
         if x.tag == '{http://www.cifr.ncsu.edu}otus':
             otus = x
 
-    logger.debug(root)
-    if not otus:
+    if otus is None:
         raise Exception("no queries found")
 
     expr = ".//x:name[text() = $name]"
@@ -101,7 +100,6 @@ def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     )
     if len(test) == 0:
         raise Exception("no species matches query")
-    logger.debug(test[0].tag)
     logger.debug(test[0].text)
     element = test[0]
 
@@ -116,20 +114,22 @@ def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     all_data = {
         "query": retval
     }
+    sequences = {}
+    for element in clade.getparent().iter('{http://www.phyloxml.org}sequence'):
+        name = element[0].text
+        value = element[1].text
+        sequences[name] = value
+    all_data["sequences"] = sequences
     placement = {}
 
     otu = element.getparent().getparent().getparent()
-    logger.debug(otu.tag)
     for taxon in otu.iter('{http://www.cifr.ncsu.edu}taxon'):
         name = taxon[0].text
         value = taxon[1].text
         placement[name] = value
 
     all_data["placement"] = placement
-
     return json.dumps(all_data, indent=4)
-
-    # return json.dumps({"hello": "world"})
 
 
 def main(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
