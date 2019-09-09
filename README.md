@@ -1,5 +1,6 @@
 # decifr-rest
 DeCIFR REST server
+The REST server to can be used to retrieve tree information from cifr PhyloXML files.
 
 ## Installation
 
