@@ -22,7 +22,6 @@ logger.debug("start app")
 
 app = Flask(__name__)
 app.config['TMP_FOLDER'] = "/var/www/html/tbas2_1/tmp"
-app.config['TMP_FOLDER'] = "/home/jim/.local/share/Trash/files"
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
