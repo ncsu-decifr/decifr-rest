@@ -8,6 +8,7 @@ from functools import wraps
 import logging
 import json
 import traceback
+import os
 
 logger = logging.getLogger("decifr-rest")
 logger.setLevel(logging.DEBUG)
@@ -21,7 +22,7 @@ logger.addHandler(fh)
 logger.debug("start app")
 
 app = Flask(__name__)
-app.config['TMP_FOLDER'] = "/var/www/html/tbas2_1/tmp"
+app.config['TMP_FOLDER'] = "/tmp/rest"
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
@@ -66,18 +67,13 @@ def list():
     )
 
     runids = []
-    for file in files:
-        runid = file[-12:-4]
-        runids.append(runid)
-
-    for file in files_updated:
-        runid = file[-12:-4]
-        runids_updated.append(runid)
+    for file in mep_files:
+        basename = os.path.basename(file)
+        runids.append(basename.replace(".mep", ""))
 
     return render_template(
         'list.xml',
-        runids=runids,
-        runids_updated=runids_updated
+        runids=runids
     )
 
 
