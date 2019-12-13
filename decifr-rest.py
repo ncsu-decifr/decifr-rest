@@ -61,15 +61,11 @@ def hello():
 def list():
     logger.debug("/list")
 
-    files = glob.glob(
-        "%s/phyloxml_cifr*.xml" % app.config['TMP_FOLDER']
+    mep_files = glob.glob(
+        "%s/*.mep" % app.config['TMP_FOLDER']
     )
-    files_updated = glob.glob(
-        "%s/phyloxml_cifr_edit_metadata*.xml" % app.config['TMP_FOLDER']
-    )
-    files = set(files) - set(files_updated)
+
     runids = []
-    runids_updated = []
     for file in files:
         runid = file[-12:-4]
         runids.append(runid)
