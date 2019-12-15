@@ -115,7 +115,7 @@ def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
         "query": retval
     }
     sequences = {}
-    for element in clade.getparent().iter('{http://www.phyloxml.org}sequence'):
+    for element in clade.getparent().iter('{http://www.cifr.ncsu.edu}sequence'):
         name = element[0].text
         value = element[1].text
         sequences[name] = value
