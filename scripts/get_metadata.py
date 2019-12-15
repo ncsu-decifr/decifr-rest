@@ -29,7 +29,7 @@ tmp_dir = "/var/www/html/tbas2_1/tmp"
 def otu_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     retval = {}
     p = XMLParser(huge_tree=True)
-    with open("%s/phyloxml_cifr_%s.xml" % (tmp_dir, runid)) as fp:
+    with open("%s/%s.mep" % (tmp_dir, runid)) as fp:
         tree = etree.parse(fp, parser=p)
     root = tree.getroot()
 
@@ -78,7 +78,7 @@ def otu_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
 def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     retval = {}
     p = XMLParser(huge_tree=True)
-    with open("%s/phyloxml_cifr_%s.xml" % (tmp_dir, runid)) as fp:
+    with open("%s/%s.mep" % (tmp_dir, runid)) as fp:
         tree = etree.parse(fp, parser=p)
     root = tree.getroot()
 
@@ -137,14 +137,13 @@ def main(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     retval = {}
     p = XMLParser(huge_tree=True)
 
-    with open("%s/phyloxml_cifr_%s.xml" % (tmp_dir, runid)) as fp:
+    with open("%s/%s.mep" % (tmp_dir, runid)) as fp:
         tree = etree.parse(fp, parser=p)
     root = tree.getroot()
     for x in root:
         logger.debug(x)
         if x.tag == '{http://www.phyloxml.org}phylogeny':
             phylogeny = x
-
 
     expr = ".//x:name[text() = $name]"
     test = phylogeny.xpath(
