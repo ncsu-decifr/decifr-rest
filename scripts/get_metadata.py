@@ -94,7 +94,7 @@ def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
         expr,
         name=query,
         namespaces={
-            'x': 'http://www.phyloxml.org',
+            'x': 'http://www.cifr.ncsu.edu',
             'b': 'http://www.cifr.ncsu.edu'
         }
     )
