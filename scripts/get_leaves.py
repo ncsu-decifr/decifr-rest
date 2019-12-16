@@ -20,7 +20,7 @@ logger.addHandler(fh)
 
 
 def get_otus(run_id, TMP_FOLDER="/var/www/html/tbas2_1/tmp"):
-    xmlfile = "%s/phyloxml_cifr_%s.xml" % (TMP_FOLDER, run_id)
+    xmlfile = "%s/%s.mep" % (TMP_FOLDER, run_id)
     p = XMLParser(huge_tree=True)
     tree = parse(xmlfile, parser=p)
     root = tree.getroot()
@@ -41,7 +41,7 @@ def get_otus(run_id, TMP_FOLDER="/var/www/html/tbas2_1/tmp"):
 
 
 def get_queries(run_id, TMP_FOLDER="/var/www/html/tbas2_1/tmp"):
-    xmlfile = "%s/phyloxml_cifr_%s.xml" % (TMP_FOLDER, run_id)
+    xmlfile = "%s/%s.mep" % (TMP_FOLDER, run_id)
     p = XMLParser(huge_tree=True)
     tree = parse(xmlfile, parser=p)
     root = tree.getroot()
@@ -68,7 +68,8 @@ def get_queries(run_id, TMP_FOLDER="/var/www/html/tbas2_1/tmp"):
 def main(run_id, TMP_FOLDER="/var/www/html/tbas2_1/tmp"):
     # raise Exception("dev")
     print(run_id)
-    xmlfile = "%s/phyloxml_cifr_%s.xml" % (TMP_FOLDER, run_id)
+    xmlfile = "%s/%s.mep" % (TMP_FOLDER, run_id)
+
     p = XMLParser(huge_tree=True)
     tree = parse(xmlfile, parser=p)
     root = tree.getroot()
