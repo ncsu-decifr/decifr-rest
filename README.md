@@ -1,22 +1,31 @@
 # decifr-rest
 DeCIFR REST server
 
-The REST server to can be used to retrieve tree information from metadata enhanced Phyloxml (.mep) files.
+The Representational State Transfer Application Program Interface (REST) server to can be used to retrieve tree information from Metadata  Enhanced Phyloxml (MEP) files.
 
 ## Installation
 
+The REST server allows a user to share information about placements from T-BAS with other users via the web. The program is written to run in a Python 3 virtual environment. At the top of the file decifr-rest.py is the line that says where the virtual environment is located. I
+have chosen to put it in the directory /usr/local/pythonenvs so you can create this directory or put it somewhere else and edit this line. First create the virtual environment.
+
 ```
+cd /usr/local
+mkdir pythonenvs
 cd /usr/local/pythonenvs
 python3 -m venv decifr-rest
 source decifr-rest/bin/activate
 pip install Flask
 pip install lxml
-cd /usr/local
-git clone https://github.com/ncsu-decifr/decifr-rest.git
-
 ```
 
-The REST  server allows a user to share information about placemnts from TBAS with other users via the web. To share the results of some placements copy the metadata enhanced Phyloxml (.mep) files created either on the publice TBAS site or with docker to a folder on your computer. If they are compressed then uncompress them (gunzip *). Edit the app.config['TMP_FOLDER']  parameter in the main file to point to this directory.
+Next install the server using git.
+
+```
+cd /usr/local
+git clone https://github.com/ncsu-decifr/decifr-rest.git
+```
+
+To share the results of some placements, copy the MEP files created either on the public T-BAS site or with docker to a folder on your computer, uncompress them (gunzip *). An example is included. Edit the app.config['TMP_FOLDER']  parameter in the main file to point to this directory.
 
 ```
 cp /var/www/html/tbas2_1/tmp/*.mep.gz /tmp/rest
