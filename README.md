@@ -9,6 +9,7 @@ The REST server allows a user to share information about placements from T-BAS w
 
 ```
 cd /usr/local
+sudo su
 mkdir pythonenvs
 cd /usr/local/pythonenvs
 python3 -m venv decifr-rest
