@@ -25,7 +25,7 @@ cd /usr/local
 git clone https://github.com/ncsu-decifr/decifr-rest.git
 ```
 
-To share the results of some placements, copy the MEP files created either on the public T-BAS site or with docker to a folder on your computer, uncompress them (gunzip *). An example is included. Edit the app.config['TMP_FOLDER']  parameter in the main file to point to this directory.
+To share the results of some placements, copy the MEP files created either on the public T-BAS site or with docker to a folder on your computer, and uncompress them (gunzip *). An example is included. Edit the app.config['TMP_FOLDER']  parameter in the main file to point to this directory.
 
 ```
 cp /var/www/html/tbas2_1/tmp/*.mep.gz /tmp/rest
