@@ -5,8 +5,7 @@ The Representational State Transfer Application Program Interface (REST) server 
 
 ## Installation
 
-The REST server allows a user to share information about placements from T-BAS with other users via the web. The program is written to run in a Python 3 virtual environment. At the top of the file decifr-rest.py is the line that says where the virtual environment is located. I
-have chosen to put it in the directory /usr/local/pythonenvs so you can create this directory or put it somewhere else and edit this line. First create the virtual environment.
+The REST server allows a user to share information about placements from T-BAS with other users via the web. The program is written to run in a Python 3 virtual environment. The default location of the virtual environment is set to /usr/local/pythonenvs. To change it edit the first line in the /usr/local/decifr-rest/decifr-rest.py script. Follow the commands below to create the virtual environment.
 
 ```
 cd /usr/local
@@ -25,7 +24,7 @@ cd /usr/local
 git clone https://github.com/ncsu-decifr/decifr-rest.git
 ```
 
-To share the results of some placements, copy the MEP files created either on the public T-BAS site or with docker to a folder on your computer, and uncompress them (gunzip *). An example is included. Edit the app.config['TMP_FOLDER']  parameter in the main file to point to this directory.
+To share the results of some placements, copy the MEP files created either on the public T-BAS site or with docker to a folder on your computer, and uncompress them by double-clicking if on Mac or Windows or using Linux command gunzip *. An example (6BLUBNSA.mep.gz) is included. Edit the app.config['TMP_FOLDER']  parameter in the main file to point to this directory.
 
 ```
 cp /var/www/html/tbas2_1/tmp/*.mep.gz /tmp/rest
