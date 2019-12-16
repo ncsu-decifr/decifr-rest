@@ -1,4 +1,6 @@
+"""
 #!/usr/local/pythonenvs/decifr-rest/bin/python
+"""
 
 # import datetime
 import logging
