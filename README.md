@@ -28,10 +28,12 @@ git clone https://github.com/ncsu-decifr/decifr-rest.git
 To share the results of some placements, copy the MEP files created either on the public T-BAS site or with docker to a folder on your computer, and uncompress them by double-clicking if on Mac or Windows or using Linux command gunzip *. An example (6BLUBNSA.mep.gz) is included. Edit the app.config['TMP_FOLDER']  parameter in the main file to point to this directory.
 
 ```
-cp /var/www/html/tbas2_1/tmp/*.mep.gz /tmp/rest
+cd /tmp
+mkdir rest
+cd /usr/local/decifr-rest
+cp 6BLUBNSA.mep.gz /tmp/rest
 cd /tmp/rest
 gunzip *
-app.config['TMP_FOLDER'] = /tmp/rest
 cd /usr/local/decifr-rest
 ./decifr-rest.py
 
