@@ -25,7 +25,7 @@ cd /usr/local
 git clone https://github.com/ncsu-decifr/decifr-rest.git
 ```
 
-To share the results of some placements, copy the MEP files created either on the public T-BAS site or with docker to a folder on your computer, and uncompress them by double-clicking if on Mac or Windows or using Linux command gunzip *. An example (6BLUBNSA.mep.gz) is included. Edit the app.config['TMP_FOLDER']  parameter in the main file to point to this directory.
+To share the results of some placements, copy the MEP files created either on the public T-BAS site or with docker to a folder on your computer, and uncompress them by double-clicking if on Mac or Windows or using Linux command gunzip *. An example (6BLUBNSA.mep.gz) is included. Edit the line in /usr/local/decifr-rest/decifr-rest .py with app.config['TMP_FOLDER'] = "/tmp/rest" to the value of the directory with the MEP files.
 
 ```
 cd /tmp
@@ -39,9 +39,9 @@ cd /usr/local/decifr-rest
 
 ```
 
-To run just type ./decifr-rest.py. This will start a development server. To run in production it would be best to run with a production server. The server should be available in your browser at localhost:8090/list
+To run just type ./decifr-rest.py. This will start the REST server. Open your browser to localhost:8090/list and there are links to a runid for each MEP file. Click on a link to see more information about the run.
 
-To restrict access to pages with basic auth add the @requires_auth decorator to the function and edit the function check_auth.
+If you want to restrict access to pages with basic authentication you can edit the /usr/local/decifr-rest/decifr-rest.py file. Each function in the file has a line @requires_auth that is commented out. If you uncomment this line that page will be restricted. Edit the function check_auth to set the login credentials.
 
 
 
