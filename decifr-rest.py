@@ -9,6 +9,7 @@ import logging
 import json
 import traceback
 import os
+import app_config
 
 logger = logging.getLogger("decifr-rest")
 logger.setLevel(logging.DEBUG)
@@ -22,7 +23,7 @@ logger.addHandler(fh)
 logger.debug("start app")
 
 app = Flask(__name__)
-app.config['TMP_FOLDER'] = "/tmp/rest"
+app.config['TMP_FOLDER'] = app_config.TMP_FOLDER
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
