@@ -47,7 +47,7 @@ def authenticate():
 
 
 def check_auth(username, password):
-    if username == 'admin' and password == 'secret':
+    if username == app_config.USERNAME and password == app_config.PASSWORD:
         return True
     else:
         return False
