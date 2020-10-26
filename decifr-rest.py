@@ -79,7 +79,7 @@ def list():
 
 
 @app.route("/run/<runid>")
-# @requires_auth
+@requires_auth
 def run(runid):
     return render_template(
         'run.xml',
@@ -88,7 +88,7 @@ def run(runid):
 
 
 @app.route("/leaves/<runid>")
-# @requires_auth
+@requires_auth
 def leaves(runid):
     import scripts.get_leaves
 
@@ -107,7 +107,7 @@ def leaves(runid):
 
 
 @app.route("/leaf/<runid>/metadata")
-# @requires_auth
+@requires_auth
 def leaf(runid):
     import scripts.get_metadata
     query = request.args.get("query")
@@ -123,7 +123,7 @@ def leaf(runid):
 
 
 @app.route("/queries/<runid>")
-# @requires_auth
+@requires_auth
 def queries(runid):
     import scripts.get_leaves
 
@@ -144,7 +144,7 @@ def queries(runid):
 
 
 @app.route("/query/<runid>/metadata")
-# @requires_auth
+@requires_auth
 def query(runid):
     import scripts.get_metadata
     query = request.args.get("query")
@@ -160,7 +160,7 @@ def query(runid):
 
 
 @app.route("/otus/<runid>")
-# @requires_auth
+@requires_auth
 def otus(runid):
     import scripts.get_leaves
 
@@ -183,7 +183,7 @@ def otus(runid):
 
 
 @app.route("/otu/<runid>/metadata")
-# @requires_auth
+@requires_auth
 def otu(runid):
     import scripts.get_metadata
     query = request.args.get("query")
