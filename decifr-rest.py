@@ -149,6 +149,7 @@ def queries(runid):
 def query(runid):
     import scripts.get_metadata
     query = request.args.get("query")
+    attr = request.args.get("attr", "na")
     try:
         retval = scripts.get_metadata.get_query(
             runid, query, app.config['TMP_FOLDER']
@@ -156,8 +157,12 @@ def query(runid):
     except Exception:
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
+    if attr == 'na':
+        return "<pre>%s</pre>" % retval
+    else:
+        result = json.loads(retval)
 
-    return "<pre>%s</pre>" % retval
+        return result['placement'][attr]
 
 
 @app.route("/otus/<runid>")
