@@ -60,6 +60,7 @@ def hello():
 
 
 @app.route("/list")
+@requires_auth
 def list():
     logger.debug("/list")
 
