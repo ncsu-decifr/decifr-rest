@@ -209,7 +209,7 @@ def otu(runid):
 @requires_auth
 def mep(runid):
     return send_from_directory(
-        "%s/%s.mep.gz" % (app.config['TMP_FOLDER'], runid)
+        app.config['TMP_FOLDER'], "%s.mep.gz" % runid
     )
 
 
