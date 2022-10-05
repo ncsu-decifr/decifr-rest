@@ -208,10 +208,13 @@ def otu(runid):
 @app.route("/mep/<runid>")
 @requires_auth
 def mep(runid):
+    '''
+    https://flask.palletsprojects.com/en/2.2.x/api/?highlight=send_from_directory#flask.send_from_directory
+    '''
     return send_from_directory(
         app.config['TMP_FOLDER'],
         "%s.mep.gz" % runid,
-        download_name="%s.mep.gz" % runid
+        as_attachment=True
     )
 
 
