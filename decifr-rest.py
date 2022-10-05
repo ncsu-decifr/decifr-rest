@@ -3,6 +3,7 @@
 from flask import Flask, escape, request, Response
 from flask import render_template
 from flask import send_from_directory
+import flask
 from werkzeug.serving import run_simple
 import glob
 from functools import wraps
@@ -22,6 +23,7 @@ formatter = logging.Formatter(
 fh.setFormatter(formatter)
 logger.addHandler(fh)
 logger.debug("start app")
+logger.debug("flask version: %s" % flask.__version__)
 
 app = Flask(__name__)
 app.config['TMP_FOLDER'] = app_config.TMP_FOLDER
@@ -214,7 +216,8 @@ def mep(runid):
     return send_from_directory(
         app.config['TMP_FOLDER'],
         "%s.mep.gz" % runid,
-        as_attachment=True
+        as_attachment=True,
+        attachment_filename="%s.mep.gz" % runid
     )
 
 
