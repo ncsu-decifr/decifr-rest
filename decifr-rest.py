@@ -2,6 +2,7 @@
 
 from flask import Flask, escape, request, Response
 from flask import render_template
+from flask import send_from_directory
 from werkzeug.serving import run_simple
 import glob
 from functools import wraps
@@ -202,6 +203,14 @@ def otu(runid):
         return "<pre>%s</pre>" % error
 
     return "<pre>%s</pre>" % retval
+
+
+@app.route("/mep/<runid>")
+@requires_auth
+def mep(runid):
+    return send_from_directory(
+        "%s/%s.mep.gz" % (app.config['TMP_FOLDER'], runid)
+    )
 
 
 if __name__ == '__main__':
