@@ -1,5 +1,11 @@
 #!/usr/local/pythonenvs/decifr-rest/bin/python
 
+'''
+pip install gunicorn==20.1.0
+pip install eventlet==0.30.2
+
+'''
+
 from flask import Flask, escape, request, Response
 from flask import render_template
 from flask import send_from_directory
@@ -216,8 +222,7 @@ def mep(runid):
     return send_from_directory(
         app.config['TMP_FOLDER'],
         "%s.mep.gz" % runid,
-        as_attachment=True,
-        attachment_filename="%s.mep.gz" % runid
+        download_name="%s.mep.gz" % runid
     )
 
 
