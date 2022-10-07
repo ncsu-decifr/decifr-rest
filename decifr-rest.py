@@ -214,7 +214,7 @@ def otu(runid):
 
 
 @app.route("/mep/<runid>")
-@requires_auth
+# @requires_auth
 def mep(runid):
     '''
     https://flask.palletsprojects.com/en/2.2.x/api/?highlight=send_from_directory#flask.send_from_directory
