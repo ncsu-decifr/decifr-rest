@@ -225,6 +225,8 @@ def mep(runid):
 
     https://unix.stackexchange.com/questions/453465/wget-how-to-download-a-served-file-keeping-its-name
 
+    Set  gzip off; may fix auto unzip in Chromium.
+
     '''
     return send_from_directory(
         app.config['TMP_FOLDER'],
