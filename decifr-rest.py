@@ -229,7 +229,9 @@ def mep(runid):
     return send_from_directory(
         app.config['TMP_FOLDER'],
         "%s.mep.gz" % runid,
-        download_name="%s.mep.gz" % runid
+        download_name="%s.mep.gz" % runid,
+        as_attachment=True,
+        mimetype='application/gzip'
     )
 
 
