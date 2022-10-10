@@ -38,6 +38,12 @@ To run just type ./decifr-rest.py. This will start the REST server. Open your br
 
 If you want to restrict access to pages with basic authentication you can edit the /usr/local/decifr-rest/decifr-rest.py file. Each function in the file has a line @requires_auth that is commented out. If you uncomment this line that page will be restricted. Edit the function check_auth to set the login credentials.
 
+The server can serve files to the browser, the command line or programatically. To use wget to retrieve mep files with the correct extension and if password protected use this command.
+
+```
+wget --content-disposition --user admin --password secret localhost:8090/mep/<runid>
+```
+
 ### BSD 3-Clause License
 
 Copyright (c) 2019, North Carolina State University
