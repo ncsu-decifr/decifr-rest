@@ -265,13 +265,23 @@ def mep(runid):
     Set  gzip off; may fix auto unzip in Chromium.
 
     '''
-    return send_from_directory(
-        app.config['TMP_FOLDER'],
-        "%s.mep.gz" % runid,
-        download_name="%s.mep.gz" % runid,
-        as_attachment=True,
-        mimetype='application/gzip'
-    )
+
+    if os.path.isfile("%s/%s_edit.mep.gz" % (app.config['TMP_FOLDER'], runid)):
+        return send_from_directory(
+            app.config['TMP_FOLDER'],
+            "%s_edit.mep.gz" % runid,
+            download_name="%s.mep.gz" % runid,
+            as_attachment=True,
+            mimetype='application/gzip'
+        )
+    else:
+        return send_from_directory(
+            app.config['TMP_FOLDER'],
+            "%s.mep.gz" % runid,
+            download_name="%s.mep.gz" % runid,
+            as_attachment=True,
+            mimetype='application/gzip'
+        )
 
 
 if __name__ == '__main__':
