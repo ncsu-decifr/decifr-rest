@@ -155,9 +155,14 @@ def queries(runid):
     import scripts.get_leaves
 
     try:
-        queries_json = scripts.get_leaves.get_queries(
-            runid, app.config['TMP_FOLDER']
-        )
+        if app.config['USE_TOOL_FOLDER']:
+            queries_json = scripts.get_leaves.get_queries(
+                runid, "%s%s" % (app.config['TOOL_FOLDER'], runid)
+            )
+        else:
+            queries_json = scripts.get_leaves.get_queries(
+                runid, app.config['TMP_FOLDER']
+            )
         queries = json.loads(queries_json)
     except Exception:
         error = traceback.format_exc()
