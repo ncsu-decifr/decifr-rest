@@ -182,9 +182,14 @@ def query(runid):
     query = request.args.get("query")
     attr = request.args.get("attr", "na")
     try:
-        retval = scripts.get_metadata.get_query(
-            runid, query, app.config['TMP_FOLDER']
-        )
+        if app.config['USE_TOOL_FOLDER']:
+            retval = scripts.get_metadata.get_query(
+                runid, query, "%s%s" % (app.config['TOOL_FOLDER'], runid)
+            )
+        else:
+            retval = scripts.get_metadata.get_query(
+                runid, query, app.config['TMP_FOLDER']
+            )
     except Exception:
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
@@ -202,9 +207,14 @@ def otus(runid):
     import scripts.get_leaves
 
     try:
-        otus_json = scripts.get_leaves.get_otus(
-            runid, app.config['TMP_FOLDER']
-        )
+        if app.config['USE_TOOL_FOLDER']:
+            otus_json = scripts.get_leaves.get_otus(
+                runid, "%s%s" % (app.config['TOOL_FOLDER'], runid)
+            )
+        else:
+            otus_json = scripts.get_leaves.get_otus(
+                runid, app.config['TMP_FOLDER']
+            )
         otus = json.loads(otus_json)
     except Exception:
         error = traceback.format_exc()
