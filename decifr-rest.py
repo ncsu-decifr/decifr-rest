@@ -35,9 +35,8 @@ app = Flask(__name__)
 app.config['TMP_FOLDER'] = app_config.TMP_FOLDER
 app.config['TOOL_FOLDER'] = app_config.TOOL_FOLDER
 app.config['USE_TOOL_FOLDER'] = app_config.USE_TOOL_FOLDER
+
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-
-
 
 
 def requires_auth(f):
