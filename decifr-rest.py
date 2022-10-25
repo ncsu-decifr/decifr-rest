@@ -33,7 +33,11 @@ logger.debug("flask version: %s" % flask.__version__)
 
 app = Flask(__name__)
 app.config['TMP_FOLDER'] = app_config.TMP_FOLDER
+app.config['TOOL_FOLDER'] = app_config.TOOL_FOLDER
+app.config['USE_TOOL_FOLDER'] = app_config.USE_TOOL_FOLDER
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+
+
 
 
 def requires_auth(f):
@@ -103,7 +107,14 @@ def leaves(runid):
     import scripts.get_leaves
 
     try:
-        leaves_json = scripts.get_leaves.main(runid, app.config['TMP_FOLDER'])
+        if app.config['USE_TOOL_FOLDER']:
+            leaves_json = scripts.get_leaves.main(
+                runid, "%s%s" % (app.config['TOOL_FOLDER'], runid)
+            )
+        else:
+            leaves_json = scripts.get_leaves.main(
+                runid, app.config['TMP_FOLDER']
+            )
         leaves = json.loads(leaves_json)
     except Exception:
         error = traceback.format_exc()
@@ -122,9 +133,15 @@ def leaf(runid):
     import scripts.get_metadata
     query = request.args.get("query")
     try:
-        retval = scripts.get_metadata.main(
-            runid, query, app.config['TMP_FOLDER']
-        )
+        if app.config['USE_TOOL_FOLDER']:
+            retval = scripts.get_metadata.main(
+                runid, query, "%s%s" % (app.config['TOOL_FOLDER'], runid)
+            )
+
+        else:
+            retval = scripts.get_metadata.main(
+                runid, query, app.config['TMP_FOLDER']
+            )
     except Exception:
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
