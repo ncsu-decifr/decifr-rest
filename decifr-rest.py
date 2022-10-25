@@ -257,7 +257,7 @@ def mep(runid):
 
     wget --content-disposition --user admin --password secret localhost:8090/mep/<runid>
 
-    Set  gzip off; may fix auto unzip in Chromium.
+    Set  gzip off; in nginx may fix auto unzip in Chromium.
 
     '''
 
