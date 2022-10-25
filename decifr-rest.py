@@ -235,9 +235,14 @@ def otu(runid):
     import scripts.get_metadata
     query = request.args.get("query")
     try:
-        retval = scripts.get_metadata.otu_query(
-            runid, query, app.config['TMP_FOLDER']
-        )
+        if app.config['USE_TOOL_FOLDER']:
+            retval = scripts.get_metadata.otu_query(
+                runid, query, "%s%s" % (app.config['TOOL_FOLDER'], runid)
+            )
+        else:
+            retval = scripts.get_metadata.otu_query(
+                runid, query, app.config['TMP_FOLDER']
+            )
     except Exception:
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
