@@ -2,7 +2,7 @@
 
 The Representational State Transfer Application Program Interface (REST) server can be used to retrieve tree information from Metadata Enhanced PhyloXML (MEP) files.
 
-## Usage
+## Example
 
 https://tools.cifr.ncsu.edu/rest
 
