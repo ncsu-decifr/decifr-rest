@@ -2,6 +2,12 @@
 
 The Representational State Transfer Application Program Interface (REST) server can be used to retrieve tree information from Metadata Enhanced PhyloXML (MEP) files.
 
+## Usage
+
+https://tools.cifr.ncsu.edu/rest
+
+The basic login is ccrp / spring_retain. The tool will unzip a MEP file and provide a link the the REST page for this run id.
+
 ## Installation
 
 The decifr-rest server allows a user to share information about placements from T-BAS with other users via the web. The program is written to run in a Python 3 virtual environment. The default location of the virtual environment is set to /usr/local/pythonenvs. To change it edit the first line in the /usr/local/decifr-rest/decifr-rest.py script. Follow the commands below to create the virtual environment.
