@@ -253,24 +253,29 @@ def otu(runid):
 # @requires_auth
 def mep(runid):
     '''
-    https://flask.palletsprojects.com/en/2.2.x/api/?highlight=send_from_directory#flask.send_from_directory
 
     wget --content-disposition --user admin --password secret localhost:8090/mep/<runid>
 
-    https://stackoverflow.com/questions/41543951/how-to-change-downloading-name-in-flask
-
-    https://unix.stackexchange.com/questions/453465/wget-how-to-download-a-served-file-keeping-its-name
-
-    Set  gzip off; may fix auto unzip in Chromium.
+    Set  gzip off; in nginx may fix auto unzip in Chromium.
 
     '''
-    return send_from_directory(
-        app.config['TMP_FOLDER'],
-        "%s.mep.gz" % runid,
-        download_name="%s.mep.gz" % runid,
-        as_attachment=True,
-        mimetype='application/gzip'
-    )
+
+    if os.path.isfile("%s/%s_edit.mep.gz" % (app.config['TMP_FOLDER'], runid)):
+        return send_from_directory(
+            app.config['TMP_FOLDER'],
+            "%s_edit.mep.gz" % runid,
+            download_name="%s.mep.gz" % runid,
+            as_attachment=True,
+            mimetype='application/gzip'
+        )
+    else:
+        return send_from_directory(
+            app.config['TMP_FOLDER'],
+            "%s.mep.gz" % runid,
+            download_name="%s.mep.gz" % runid,
+            as_attachment=True,
+            mimetype='application/gzip'
+        )
 
 
 if __name__ == '__main__':
