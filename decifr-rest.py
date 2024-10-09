@@ -6,7 +6,8 @@ pip install eventlet==0.30.2
 
 '''
 
-from flask import Flask, escape, request, Response
+from flask import Flask, request, Response
+from markupsafe import escape
 from flask import render_template
 from flask import send_from_directory
 import flask
