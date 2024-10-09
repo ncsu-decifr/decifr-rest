@@ -30,7 +30,9 @@ formatter = logging.Formatter(
 fh.setFormatter(formatter)
 logger.addHandler(fh)
 logger.debug("start app")
-logger.debug("flask version: %s" % flask.__version__)
+
+# DeprecationWarning: The '__version__' attribute is deprecated
+# logger.debug("flask version: %s" % flask.__version__)
 
 app = Flask(__name__)
 app.config['TMP_FOLDER'] = app_config.TMP_FOLDER
