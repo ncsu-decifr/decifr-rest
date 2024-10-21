@@ -9,11 +9,11 @@ or TOOL_FOLDER.
 '''
 
 
-TMP_FOLDER = "/var/www/xml_archives"
+TMP_FOLDER = "/tmp_folder"
 USERNAME = 'admin'
 PASSWORD = 'secret'
 
 # set to full path of tool folder less <runid>
-TOOL_FOLDER = "/var/www/html/tbas2_1/tmp/rest"
-USE_TOOL_FOLDER = True
+TOOL_FOLDER = "/another/location"
+USE_TOOL_FOLDER = False
 

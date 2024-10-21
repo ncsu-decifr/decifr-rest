@@ -262,10 +262,13 @@ def mep(runid):
     Set  gzip off; in nginx may fix auto unzip in Chromium.
 
     '''
+    # change path from uncompressed to zipped perm folder
 
-    if os.path.isfile("%s/%s_edit.mep.gz" % (app.config['TMP_FOLDER'], runid)):
+    TMP_FOLDER = "%s/.." % app.config['TMP_FOLDER']
+
+    if os.path.isfile("%s/%s_edit.mep.gz" % (TMP_FOLDER, runid)):
         return send_from_directory(
-            app.config['TMP_FOLDER'],
+            TMP_FOLDER,
             "%s_edit.mep.gz" % runid,
             download_name="%s.mep.gz" % runid,
             as_attachment=True,
@@ -273,7 +276,7 @@ def mep(runid):
         )
     else:
         return send_from_directory(
-            app.config['TMP_FOLDER'],
+            TMP_FOLDER,
             "%s.mep.gz" % runid,
             download_name="%s.mep.gz" % runid,
             as_attachment=True,
