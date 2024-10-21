@@ -107,6 +107,7 @@ def run(runid):
 @requires_auth
 def leaves(runid):
     import scripts.get_leaves
+    return_type = request.args.get("return_type", "html")
 
     try:
         if app.config['USE_TOOL_FOLDER']:
@@ -122,11 +123,14 @@ def leaves(runid):
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
 
-    return render_template(
-        'leaves.xml',
-        runid=runid,
-        leaves=leaves
-    )
+    if return_type == 'html':
+        return render_template(
+            'leaves.xml',
+            runid=runid,
+            leaves=leaves
+        )
+    else:
+        return leaves_json
 
 
 @app.route("/leaf/<runid>/metadata")
