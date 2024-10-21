@@ -264,7 +264,9 @@ def mep(runid):
     '''
     # change path from uncompressed to zipped perm folder
 
-    TMP_FOLDER = "%s/.." % app.config['TMP_FOLDER']
+    TMP_FOLDER = "%s/../" % app.config['TMP_FOLDER']
+
+    logger.debug(TMP_FOLDER)
 
     if os.path.isfile("%s/%s_edit.mep.gz" % (TMP_FOLDER, runid)):
         return send_from_directory(
