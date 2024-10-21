@@ -153,7 +153,10 @@ def leaf(runid):
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
 
-    return "<pre>%s</pre>" % retval
+    if return_type == 'html':
+        return "<pre>%s</pre>" % retval
+    else:
+        return retval
 
 
 @app.route("/queries/<runid>")
@@ -176,11 +179,14 @@ def queries(runid):
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
 
-    return render_template(
-        'queries.xml',
-        runid=runid,
-        queries=queries
-    )
+    if return_type == 'html':
+        return render_template(
+            'queries.xml',
+            runid=runid,
+            queries=queries
+        )
+    else:
+        return queries_json
 
 
 @app.route("/query/<runid>/metadata")
@@ -202,8 +208,13 @@ def query(runid):
     except Exception:
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
-    if attr == 'na':
+
+    if attr == 'na' and return_type == 'html':
         return "<pre>%s</pre>" % retval
+
+    elif attr == 'na':
+        return retval
+
     else:
         result = json.loads(retval)
 
@@ -230,13 +241,17 @@ def otus(runid):
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
 
-    # return otus_json
 
-    return render_template(
-        'otus.xml',
-        runid=runid,
-        otus=otus
-    )
+    if return_type == 'html':
+        return render_template(
+            'otus.xml',
+            runid=runid,
+            otus=otus
+        )
+    else:
+        return otus_json
+
+
 
 
 @app.route("/otu/<runid>/metadata")
@@ -258,7 +273,10 @@ def otu(runid):
         error = traceback.format_exc()
         return "<pre>%s</pre>" % error
 
-    return "<pre>%s</pre>" % retval
+    if return_type == 'html':
+        return "<pre>%s</pre>" % retval
+    else:
+        return retval
 
 
 @app.route("/mep/<runid>")
