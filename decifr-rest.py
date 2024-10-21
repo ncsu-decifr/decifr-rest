@@ -138,6 +138,7 @@ def leaves(runid):
 def leaf(runid):
     import scripts.get_metadata
     query = request.args.get("query")
+    return_type = request.args.get("return_type", "html")
     try:
         if app.config['USE_TOOL_FOLDER']:
             retval = scripts.get_metadata.main(
@@ -159,6 +160,7 @@ def leaf(runid):
 @requires_auth
 def queries(runid):
     import scripts.get_leaves
+    return_type = request.args.get("return_type", "html")
 
     try:
         if app.config['USE_TOOL_FOLDER']:
@@ -187,6 +189,7 @@ def query(runid):
     import scripts.get_metadata
     query = request.args.get("query")
     attr = request.args.get("attr", "na")
+    return_type = request.args.get("return_type", "html")
     try:
         if app.config['USE_TOOL_FOLDER']:
             retval = scripts.get_metadata.get_query(
@@ -211,6 +214,7 @@ def query(runid):
 @requires_auth
 def otus(runid):
     import scripts.get_leaves
+    return_type = request.args.get("return_type", "html")
 
     try:
         if app.config['USE_TOOL_FOLDER']:
@@ -240,6 +244,7 @@ def otus(runid):
 def otu(runid):
     import scripts.get_metadata
     query = request.args.get("query")
+    return_type = request.args.get("return_type", "html")
     try:
         if app.config['USE_TOOL_FOLDER']:
             retval = scripts.get_metadata.otu_query(
