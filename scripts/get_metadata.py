@@ -124,7 +124,7 @@ def get_query(runid, query, tmp_dir="/var/www/html/tbas2_1/tmp"):
     all_data["sequences"] = sequences
     placement = {}
 
-    otu = element.getparent().getparent().getparent()
+    otu = element.getparent().getparent()
     for taxon in otu.iter('{http://www.cifr.ncsu.edu}taxon'):
         name = taxon[0].text
         value = taxon[1].text
