@@ -5,10 +5,11 @@ Example client script.
 import requests
 import sys
 import os
+import json
 
-SERVER = 'https://rest.cifr.ncsu.edu/'
+SERVER = 'https://rest.cifr.ncsu.edu'
 USERNAME = 'admin'
-PASSWORD = 'secret'
+PASSWORD = 'password'
 LOCAL_DIRECTORY = '/tmp/'
 
 def main(run_id):
@@ -19,9 +20,31 @@ def main(run_id):
 
     leaves_url = "%s/leaves/%s?return_type=json" % (SERVER, run_id)
     r = requests.get(leaves_url, auth=(USERNAME, PASSWORD))
+    print(r.status_code)
+    if r.status_code != 200:
+        print("imvalid runid or server error")
+        sys.exit()
 
     with open("leaves.json", "w") as fp:
         fp.write(r.text)
+
+    os.makedirs("leaves", exist_ok = True)
+    leaves_json = r.text
+    leaves = json.loads(leaves_json)
+
+    for leaf in leaves:
+        leaf_url = "%s/leaf/%s/metadata?query=%s&return_type=json" % (
+            SERVER, run_id, leaf
+        )
+        r = requests.get(leaf_url, auth=(USERNAME, PASSWORD))
+        if r.status_code != 200:
+            continue
+        else:
+            print(leaf)
+            with open("leaves/%s.json" % leaf, "w") as fp:
+                fp.write(r.text)
+
+
 
 
 
