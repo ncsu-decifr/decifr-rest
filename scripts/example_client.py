@@ -1,5 +1,5 @@
 """
-#!/usr/local/pythonenvs/decifr-rest/bin/python
+Example client script.
 """
 
 import requests
@@ -15,10 +15,15 @@ def main(run_id):
     print("getting data for %s" % run_id)
     work_dir = "%s/decifr-rest%s" % (LOCAL_DIRECTORY, run_id)
     os.makedirs(work_dir, exist_ok = True)
+    os.chdir(work_dir)
 
     leaves_url = "%s/leaves/%s?return_type=json" % (SERVER, run_id)
     r = requests.get(leaves_url, auth=(USERNAME, PASSWORD))
-    print(r.text)
+
+    with open("leaves.json", "w") as fp:
+        fp.write(r.text)
+
+
 
 
 if __name__ == '__main__':
