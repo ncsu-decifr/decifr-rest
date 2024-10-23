@@ -12,7 +12,7 @@ USERNAME = 'admin'
 PASSWORD = 'password'
 LOCAL_DIRECTORY = '/tmp/'
 
-def main(run_id):
+def leaves(run_id):
     print("getting data for %s" % run_id)
     work_dir = "%s/decifr-rest%s" % (LOCAL_DIRECTORY, run_id)
     os.makedirs(work_dir, exist_ok = True)
@@ -44,14 +44,19 @@ def main(run_id):
             with open("leaves/%s.json" % leaf, "w") as fp:
                 fp.write(r.text)
 
-
-
-
+def queries(run_id):
+    pass
 
 
 if __name__ == '__main__':
     try:
         run_id = sys.argv[1]
+        mode = sys.argv[2]
     except IndexError:
-        print("usage: python example_client.py <run_id>")
-    main(run_id)
+        print("usage: python example_client.py <run_id> <leaves|queries>")
+        sys.exit()
+
+    if mode == 'leaves':
+        leaves(run_id)
+    if mode == 'queries':
+        queries(run_id)
