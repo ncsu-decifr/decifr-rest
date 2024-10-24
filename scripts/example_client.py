@@ -1,5 +1,7 @@
 """
 Example client script.
+
+pip install  requests
 """
 
 import requests
