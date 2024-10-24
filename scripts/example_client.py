@@ -1,6 +1,8 @@
 """
 Example client script.
 
+To use the script you must untar the MEP archive using https://vclvm178-33.vcl.ncsu.edu/rest
+
 pip install  requests
 """
 
