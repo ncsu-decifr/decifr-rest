@@ -330,13 +330,15 @@ def mep(runid):
     '''
     # change path from uncompressed to zipped perm folder
 
+
     qry = "select * from tree_perms, groups where tree_perms.tree_name = groups.tree"
     qry += " and tree_perms.permanent = True and tree_perms.runid = %s"
     cur = g.db.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cur.execute(qry, (runid,))
     if cur.rowcount > 0:
-        row = cur.fetchone()
-        logger.debug(row)
+        logger.debug("private file not available using this tool")
+        return json.dumps(["private file not available using this tool"])
+
 
     TMP_FOLDER = "%s/../" % app.config['TMP_FOLDER']
 
