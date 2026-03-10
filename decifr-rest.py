@@ -336,8 +336,9 @@ def mep(runid):
     cur = g.db.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cur.execute(qry, (runid,))
     if cur.rowcount > 0:
-        logger.debug("private file not available using this tool")
-        return json.dumps(["private file not available using this tool"])
+        if row['private']
+            logger.debug("private file not available using this tool")
+            return json.dumps(["private file not available using this tool"])
 
 
     TMP_FOLDER = "%s/../" % app.config['TMP_FOLDER']
