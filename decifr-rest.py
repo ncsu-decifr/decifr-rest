@@ -20,13 +20,14 @@ import traceback
 import os
 import psycopg2
 import psycopg2.extras
+from flask import g
 import configparser
 
 import app_config
 
 config = configparser.ConfigParser()
 config.sections()
-config.read('scripts/config.ini')
+# config.read('scripts/config.ini')
 
 logger = logging.getLogger("decifr-rest")
 logger.setLevel(logging.DEBUG)
@@ -67,7 +68,20 @@ def connect_db():
         port=port
     )
 
+@app.before_request
+def before_request():
+    # session.permanent = True
+    try:
+        g.db = connect_db()
+    except Exception as e:
+        logger.debug(e.args)
 
+
+@app.teardown_request
+def teardown_request(exception):
+    db = getattr(g, 'db', None)
+    if db is not None:
+        db.close()
 
 def requires_auth(f):
     @wraps(f)
