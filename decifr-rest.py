@@ -337,7 +337,7 @@ def mep(runid):
     cur.execute(qry, (runid,))
     if cur.rowcount > 0:
         row = cur.fetchone()
-        if row['private']
+        if row['private']:
             logger.debug("private file not available using this tool")
             return json.dumps(["private file not available using this tool"])
 
