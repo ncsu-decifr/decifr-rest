@@ -27,7 +27,7 @@ import app_config
 
 config = configparser.ConfigParser()
 config.sections()
-# config.read('scripts/config.ini')
+config.read('scripts/config.ini')
 
 logger = logging.getLogger("decifr-rest")
 logger.setLevel(logging.DEBUG)
@@ -57,8 +57,6 @@ def connect_db():
     password = config['database']['password']
     host = config['database']['host']
     port = config['database']['port']
-
-
 
     return psycopg2.connect(
         dbname=dbname,
@@ -331,6 +329,14 @@ def mep(runid):
 
     '''
     # change path from uncompressed to zipped perm folder
+
+    qry = "select * from tree_perms, groups where tree_perms.tree_name = groups.tree"
+    qry += " and tree_perms.permanent = True and tree_perms.runid = %s"
+    cur = g.db.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    cur.execute(qry, (runid,))
+    if cur.rowcount > 0:
+        row = cur.fetchone()
+        logger.debug(row)
 
     TMP_FOLDER = "%s/../" % app.config['TMP_FOLDER']
 
