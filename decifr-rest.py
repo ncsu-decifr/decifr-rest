@@ -18,7 +18,15 @@ import logging
 import json
 import traceback
 import os
+import psycopg2
+import psycopg2.extras
+import configparser
+
 import app_config
+
+config = configparser.ConfigParser()
+config.sections()
+config.read('scripts/config.ini')
 
 logger = logging.getLogger("decifr-rest")
 logger.setLevel(logging.DEBUG)
@@ -40,6 +48,25 @@ app.config['TOOL_FOLDER'] = app_config.TOOL_FOLDER
 app.config['USE_TOOL_FOLDER'] = app_config.USE_TOOL_FOLDER
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+
+def connect_db():
+
+    dbname = config['database']['dbname']
+    user = config['database']['user']
+    password = config['database']['password']
+    host = config['database']['host']
+    port = config['database']['port']
+
+
+
+    return psycopg2.connect(
+        dbname=dbname,
+        user=user,
+        host=host,
+        password=password,
+        port=port
+    )
+
 
 
 def requires_auth(f):
